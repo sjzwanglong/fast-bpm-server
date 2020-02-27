@@ -11,20 +11,12 @@ func (bs *BaseServ) ById(out interface{}, id string) {
 	baseDao.ById(out, id)
 }
 
-func (bs *BaseServ) List(out interface{}, where string, params ...interface{}) {
-	if len(params) > 0 {
-		baseDao.List(out, where, params)
-	} else {
-		baseDao.List(out, where)
-	}
+func (bs *BaseServ) List(out interface{}, params interface{}) {
+	baseDao.List(out, params)
 }
 
-func (bs *BaseServ) Page(out interface{}, limit int, offset int, where string, params ...interface{}) {
-	if len(params) > 0 {
-		baseDao.Page(out, limit, offset, where, params)
-	} else {
-		baseDao.Page(out, limit, offset, where)
-	}
+func (bs *BaseServ) Page(out interface{}, limit, offset int, params interface{}) {
+	baseDao.Page(out, limit, offset, params)
 }
 
 func (bs *BaseServ) Create(out interface{}) {

@@ -11,20 +11,12 @@ func (bd *BaseDao) ById(out interface{}, id string) {
 	db.GetDBFactory().Pool.First(out, "ID = ?", id)
 }
 
-func (bd *BaseDao) List(out interface{}, where string, params ...interface{}) {
-	if len(params) > 0 {
-		db.GetDBFactory().Pool.Find(out, where, params)
-	} else {
-		db.GetDBFactory().Pool.Find(out, where)
-	}
+func (bd *BaseDao) List(out interface{}, params interface{}) {
+	db.GetDBFactory().Pool.Where(params).Find(out)
 }
 
-func (bd *BaseDao) Page(out interface{}, limit int, offset int, where string, params ...interface{}) {
-	if len(params) > 0 {
-		db.GetDBFactory().Pool.Limit(limit).Offset(offset).Find(out, where, params)
-	} else {
-		db.GetDBFactory().Pool.Limit(limit).Offset(offset).Find(out, where)
-	}
+func (bd *BaseDao) Page(out interface{}, limit, offset int, params interface{}) {
+	db.GetDBFactory().Pool.Where(params).Limit(limit).Offset(offset).Find(out)
 }
 
 func (bd *BaseDao) Create(out interface{}) {

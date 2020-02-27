@@ -32,6 +32,9 @@ func (m *Mysql) initPool(config *Config) *Mysql {
 	// 启动日志记录
 	db.LogMode(config.LogMode)
 
+	// 全局忽略表名复数规则
+	db.SingularTable(true)
+
 	m.db = db
 
 	return m

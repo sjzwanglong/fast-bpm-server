@@ -11,10 +11,12 @@ type CommonModel interface {
 }
 
 type BaseModel struct {
-	ID        string     `gorm:"primary_key"`
-	CreatedAt time.Time  `gorm:"column:CREATED_AT"`
-	UpdatedAt time.Time  `gorm:"column:UPDATED_AT"`
-	DeletedAt *time.Time `gorm:"column:DELETED_AT",sql:"index"`
+	ID        string     `gorm:"primary_key" form:"id" uri:"id" json:"id"`
+	CreatedBy string     `gorm:"column:createdBy"`
+	CreatedAt time.Time  `gorm:"column:createdAt"`
+	UpdatedAt time.Time  `gorm:"column:createdAt"`
+	DeletedAt *time.Time `gorm:"column:deletedAt",sql:"index"`
+	SysState  int        `gorm:"column:sysState" form:"sysState" uri:"sysState" json:"sysState"`
 }
 
 func (bd *BaseModel) BeforeCreate(scope *gorm.Scope) error {

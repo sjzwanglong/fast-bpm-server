@@ -1,14 +1,17 @@
 package controller
 
-import "fast-bpm/service"
+import (
+	"encoding/json"
+	"fast-bpm/service"
+)
 
 type BaseController struct {
 }
 
 type Controller interface {
 	ById(out interface{}, id string)
-	List(out interface{}, where string, params ...interface{})
-	Page(out interface{}, limit int, offset int, where string, params ...interface{})
+	List(out interface{}, params string)
+	Page(out interface{}, limit, offset int, params string)
 	Create(out interface{})
 	Update(out interface{})
 	Delete(out interface{})
@@ -21,20 +24,16 @@ func (bc *BaseController) ById(out interface{}, id string) {
 	baseServ.ById(out, id)
 }
 
-func (bc *BaseController) List(out interface{}, where string, params ...interface{}) {
-	if len(params) > 0 {
-		baseServ.List(out, where, params)
-	} else {
-		baseServ.List(out, where)
-	}
+func (bc *BaseController) List(out interface{}, params string) {
+	var tempParams interface{}
+	json.Unmarshal([]byte(params), &tempParams)
+	baseServ.List(out, tempParams)
 }
 
-func (bc *BaseController) Page(out interface{}, limit int, offset int, where string, params ...interface{}) {
-	if len(params) > 0 {
-		baseServ.Page(out, limit, offset, where, params)
-	} else {
-		baseServ.Page(out, limit, offset, where)
-	}
+func (bc *BaseController) Page(out interface{}, limit, offset int, params string) {
+	var tempParams interface{}
+	json.Unmarshal([]byte(params), &tempParams)
+	baseServ.Page(out, limit, offset, tempParams)
 
 }
 
