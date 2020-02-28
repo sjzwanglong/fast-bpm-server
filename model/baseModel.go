@@ -14,7 +14,7 @@ type BaseModel struct {
 	ID        string     `gorm:"primary_key" form:"id" uri:"id" json:"id"`
 	CreatedBy string     `gorm:"column:createdBy"`
 	CreatedAt time.Time  `gorm:"column:createdAt"`
-	UpdatedAt time.Time  `gorm:"column:createdAt"`
+	UpdatedAt time.Time  `gorm:"column:updatedAt"`
 	DeletedAt *time.Time `gorm:"column:deletedAt",sql:"index"`
 	SysState  int        `gorm:"column:sysState" form:"sysState" uri:"sysState" json:"sysState"`
 }

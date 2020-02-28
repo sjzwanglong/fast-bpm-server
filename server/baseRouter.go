@@ -12,14 +12,14 @@ import (
 func addDualBaseRouter(group *gin.RouterGroup, ctl controller.Controller) {
 	group.GET("/", func(c *gin.Context) {
 		list := model.NewModelInstance(group.BasePath())
-		ctl.List(list, c.Query("query"))
+		ctl.List(list, c.Query("query"), c.Query("order"))
 		c.JSON(200, list)
 	})
-	group.GET("/page/:limit/:offset", func(c *gin.Context) {
+	group.GET("/page/:pageCount/:pageNo", func(c *gin.Context) {
 		list := model.NewModelInstance(group.BasePath())
-		limit, _ := strconv.Atoi(c.Param("limit"))
-		offset, _ := strconv.Atoi(c.Param("offset"))
-		ctl.Page(list, limit, offset, c.Query("query"))
+		pageCount, _ := strconv.Atoi(c.Param("pageCount"))
+		pageNo, _ := strconv.Atoi(c.Param("pageNo"))
+		ctl.Page(list, pageCount, pageNo, c.Query("query"), c.Query("order"))
 		c.JSON(200, list)
 	})
 }
@@ -36,21 +36,22 @@ func addSingularBaseRouter(group *gin.RouterGroup, ctl controller.Controller) {
 		err := c.ShouldBindJSON(out)
 		if err != nil {
 			fmt.Println("绑定参数失败！ err=", err)
+			return
 		}
 		ctl.Create(out)
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
+		c.JSON(200, out)
 	})
 	group.PUT("/:id", func(c *gin.Context) {
 		out := model.NewModelInstance(group.BasePath())
 		err := c.ShouldBindUri(out)
 		if err != nil {
 			fmt.Println("URL绑定参数失败！ err=", err)
+			return
 		}
 		err = c.ShouldBindJSON(out)
 		if err != nil {
 			fmt.Println("JSON绑定参数失败！ err=", err)
+			return
 		}
 		ctl.Update(out)
 		c.JSON(200, out)
@@ -60,22 +61,20 @@ func addSingularBaseRouter(group *gin.RouterGroup, ctl controller.Controller) {
 		err := c.ShouldBindUri(out)
 		if err != nil {
 			fmt.Println("绑定参数失败！ err=", err)
+			return
 		}
 		ctl.Delete(out)
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
+		c.JSON(200, out)
 	})
 	group.DELETE("/destroy/:id", func(c *gin.Context) {
 		out := model.NewModelInstance(group.BasePath())
 		err := c.ShouldBindUri(out)
 		if err != nil {
 			fmt.Println("绑定参数失败！ err=", err)
+			return
 		}
 		c.Param("destroy")
-		ctl.Delete(out)
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
+		ctl.Destroy(out)
+		c.JSON(200, out)
 	})
 }

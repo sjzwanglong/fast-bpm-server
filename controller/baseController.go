@@ -10,8 +10,8 @@ type BaseController struct {
 
 type Controller interface {
 	ById(out interface{}, id string)
-	List(out interface{}, params string)
-	Page(out interface{}, limit, offset int, params string)
+	List(out interface{}, params, order string)
+	Page(out interface{}, pageCount, pageNo int, params, order string)
 	Create(out interface{})
 	Update(out interface{})
 	Delete(out interface{})
@@ -24,16 +24,16 @@ func (bc *BaseController) ById(out interface{}, id string) {
 	baseServ.ById(out, id)
 }
 
-func (bc *BaseController) List(out interface{}, params string) {
+func (bc *BaseController) List(out interface{}, params, order string) {
 	var tempParams interface{}
 	json.Unmarshal([]byte(params), &tempParams)
-	baseServ.List(out, tempParams)
+	baseServ.List(out, tempParams, order)
 }
 
-func (bc *BaseController) Page(out interface{}, limit, offset int, params string) {
+func (bc *BaseController) Page(out interface{}, pageCount, pageNo int, params, order string) {
 	var tempParams interface{}
 	json.Unmarshal([]byte(params), &tempParams)
-	baseServ.Page(out, limit, offset, tempParams)
+	baseServ.Page(out, pageCount, (pageNo-1)*pageCount, tempParams, order)
 
 }
 
