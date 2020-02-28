@@ -1,0 +1,12 @@
+package model
+
+import "fast-bpm/utils"
+
+type {modelName}Model struct {
+	BaseModel
+	{columns}
+}
+
+func (p {modelName}Model) TableName() string {
+	return "{tableName}"
+}

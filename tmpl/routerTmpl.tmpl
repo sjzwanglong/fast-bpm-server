@@ -1,0 +1,15 @@
+package server
+
+import (
+	"fast-bpm/controller"
+)
+
+func register{routerName}Router() {
+	ctl := &controller.{routerName}Controller{} //controller对象
+	dualGroup := r.Group("{dualRouter}")
+	singularGroup := r.Group("{singularRouter}")
+	{
+		addDualBaseRouter(dualGroup, ctl)
+		addSingularBaseRouter(singularGroup, ctl)
+	}
+}
