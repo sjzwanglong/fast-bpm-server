@@ -9,6 +9,6 @@ type OrgDeptUserModel struct {
 	UserPost string `gorm:"column:userPost" form:"userPost" uri:"userPost" json:"userPost"`
 }
 
-func (p OrgDeptUserModel) TableName() string {
+func (du OrgDeptUserModel) TableName() string {
 	return utils.OrgDeptUserInfo
 }

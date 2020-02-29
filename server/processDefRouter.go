@@ -4,6 +4,10 @@ import (
 	"fast-bpm/controller"
 )
 
+func init() {
+	Register(registerProcessDefRouter)
+}
+
 func registerProcessDefRouter() {
 	ctl := &controller.ProcessDefController{} //controller对象
 	dualGroup := r.Group("processDefs")

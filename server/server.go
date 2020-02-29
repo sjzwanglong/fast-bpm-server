@@ -5,12 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var r *gin.Engine
-
-func InitServer() {
-	r = gin.Default()
-	Register()
-}
+var r *gin.Engine = gin.Default()
 
 func StartServer() {
 	err := r.Run()

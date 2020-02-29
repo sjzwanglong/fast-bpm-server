@@ -14,6 +14,6 @@ type OrgCmpyModel struct {
 	CmpyParent      string `gorm:"column:cmpyParent" form:"cmpyParent" uri:"cmpyParent" json:"cmpyParent"`
 }
 
-func (p OrgCmpyModel) TableName() string {
+func (c OrgCmpyModel) TableName() string {
 	return utils.OrgCmpyInfo
 }

@@ -18,8 +18,9 @@ type OrgUserModel struct {
 	UserMobPhone    string `gorm:"column:userMobPhone" form:"userMobPhone" uri:"userMobPhone" json:"userMobPhone"`
 	UserOfficePhone string `gorm:"column:userOfficePhone" form:"userOfficePhone" uri:"userOfficePhone" json:"userOfficePhone"`
 	UserEmail       string `gorm:"column:userEmail" form:"userEmail" uri:"userEmail" json:"userEmail"`
+	CmpyId          string `gorm:"column:cmpyId" form:"cmpyId" uri:"cmpyId" json:"cmpyId"`
 }
 
-func (p OrgUserModel) TableName() string {
+func (u OrgUserModel) TableName() string {
 	return utils.OrgUserInfo
 }

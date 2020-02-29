@@ -14,6 +14,6 @@ type OrgDeptModel struct {
 	CmpyId          string `gorm:"column:cmpyId" form:"cmpyId" uri:"cmpyId" json:"cmpyId"`
 }
 
-func (p OrgDeptModel) TableName() string {
+func (d OrgDeptModel) TableName() string {
 	return utils.OrgDeptInfo
 }

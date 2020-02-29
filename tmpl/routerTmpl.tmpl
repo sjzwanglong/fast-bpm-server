@@ -4,6 +4,10 @@ import (
 	"fast-bpm/controller"
 )
 
+func init() {
+	Register(register{routerName}Router)
+}
+
 func register{routerName}Router() {
 	ctl := &controller.{routerName}Controller{} //controller对象
 	dualGroup := r.Group("{dualRouter}")

@@ -4,6 +4,10 @@ import (
 	"fast-bpm/controller"
 )
 
+func init() {
+	Register(registerOrgDeptUserRouter)
+}
+
 func registerOrgDeptUserRouter() {
 	ctl := &controller.OrgDeptUserController{} //controller对象
 	dualGroup := r.Group("deptusers")
