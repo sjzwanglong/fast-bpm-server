@@ -17,3 +17,11 @@ type OrgCmpyModel struct {
 func (c OrgCmpyModel) TableName() string {
 	return utils.OrgCmpyInfo
 }
+
+func (c OrgCmpyModel) Clone() interface{} {
+	return new(OrgCmpyModel)
+}
+
+func (c OrgCmpyModel) CloneList() interface{} {
+	return new([]*OrgCmpyModel)
+}

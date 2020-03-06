@@ -2,21 +2,20 @@ package server
 
 import (
 	"fast-bpm/controller"
-	"fast-bpm/model"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"strconv"
 )
 
 // 添加集合对象路由组
-func addDualBaseRouter(group *gin.RouterGroup, ctl controller.Controller) {
+func addDualBaseRouter(instanceFunc func() interface{}, group *gin.RouterGroup, ctl controller.Controller) {
 	group.GET("/", func(c *gin.Context) {
-		list := model.NewModelInstance(group.BasePath())
+		list := instanceFunc()
 		ctl.List(list, c.Query("query"), c.Query("order"))
 		c.JSON(200, list)
 	})
 	group.GET("/page/:pageCount/:pageNo", func(c *gin.Context) {
-		list := model.NewModelInstance(group.BasePath())
+		list := instanceFunc()
 		pageCount, _ := strconv.Atoi(c.Param("pageCount"))
 		pageNo, _ := strconv.Atoi(c.Param("pageNo"))
 		ctl.Page(list, pageCount, pageNo, c.Query("query"), c.Query("order"))
@@ -25,14 +24,14 @@ func addDualBaseRouter(group *gin.RouterGroup, ctl controller.Controller) {
 }
 
 // 添加单体对象路由组
-func addSingularBaseRouter(group *gin.RouterGroup, ctl controller.Controller) {
+func addSingularBaseRouter(instanceFunc func() interface{}, group *gin.RouterGroup, ctl controller.Controller) {
 	group.GET("/:id", func(c *gin.Context) {
-		out := model.NewModelInstance(group.BasePath())
+		out := instanceFunc()
 		ctl.ById(out, c.Param("id"))
 		c.JSON(200, out)
 	})
 	group.POST("/", func(c *gin.Context) {
-		out := model.NewModelInstance(group.BasePath())
+		out := instanceFunc()
 		err := c.ShouldBindJSON(out)
 		if err != nil {
 			fmt.Println("绑定参数失败！ err=", err)
@@ -42,7 +41,7 @@ func addSingularBaseRouter(group *gin.RouterGroup, ctl controller.Controller) {
 		c.JSON(200, out)
 	})
 	group.PUT("/:id", func(c *gin.Context) {
-		out := model.NewModelInstance(group.BasePath())
+		out := instanceFunc()
 		err := c.ShouldBindUri(out)
 		if err != nil {
 			fmt.Println("URL绑定参数失败！ err=", err)
@@ -57,7 +56,7 @@ func addSingularBaseRouter(group *gin.RouterGroup, ctl controller.Controller) {
 		c.JSON(200, out)
 	})
 	group.DELETE("/delete/:id", func(c *gin.Context) {
-		out := model.NewModelInstance(group.BasePath())
+		out := instanceFunc()
 		err := c.ShouldBindUri(out)
 		if err != nil {
 			fmt.Println("绑定参数失败！ err=", err)
@@ -67,7 +66,7 @@ func addSingularBaseRouter(group *gin.RouterGroup, ctl controller.Controller) {
 		c.JSON(200, out)
 	})
 	group.DELETE("/destroy/:id", func(c *gin.Context) {
-		out := model.NewModelInstance(group.BasePath())
+		out := instanceFunc()
 		err := c.ShouldBindUri(out)
 		if err != nil {
 			fmt.Println("绑定参数失败！ err=", err)

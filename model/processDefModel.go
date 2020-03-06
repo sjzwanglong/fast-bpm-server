@@ -14,3 +14,11 @@ type ProcessDefModel struct {
 func (p ProcessDefModel) TableName() string {
 	return utils.ProcessDefInfo
 }
+
+func (c ProcessDefModel) Clone() *ProcessDefModel {
+	return new(ProcessDefModel)
+}
+
+func (c ProcessDefModel) CloneList() *[]*ProcessDefModel {
+	return new([]*ProcessDefModel)
+}

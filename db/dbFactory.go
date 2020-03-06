@@ -10,7 +10,7 @@ import (
 
 type Factory struct {
 	Pool *gorm.DB
-	Cfg *Config
+	Cfg  *Config
 }
 
 var factory = &Factory{}

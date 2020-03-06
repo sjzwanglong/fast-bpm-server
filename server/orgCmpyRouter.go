@@ -2,6 +2,7 @@ package server
 
 import (
 	"fast-bpm/controller"
+	"fast-bpm/model"
 )
 
 func init() {
@@ -12,8 +13,9 @@ func registerOrgCmpyRouter() {
 	ctl := &controller.OrgCmpyController{} //controller对象
 	dualGroup := r.Group("cmpys")
 	singularGroup := r.Group("cmpy")
+	instance := &model.OrgCmpyModel{}
 	{
-		addDualBaseRouter(dualGroup, ctl)
-		addSingularBaseRouter(singularGroup, ctl)
+		addDualBaseRouter(instance.CloneList, dualGroup, ctl)
+		addSingularBaseRouter(instance.Clone, singularGroup, ctl)
 	}
 }

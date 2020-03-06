@@ -6,10 +6,6 @@ import (
 	"time"
 )
 
-type CommonModel interface {
-	TableName()
-}
-
 type BaseModel struct {
 	ID        string     `gorm:"primary_key" form:"id" uri:"id" json:"id"`
 	CreatedBy string     `gorm:"column:createdBy"`

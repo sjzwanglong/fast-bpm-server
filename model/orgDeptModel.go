@@ -17,3 +17,11 @@ type OrgDeptModel struct {
 func (d OrgDeptModel) TableName() string {
 	return utils.OrgDeptInfo
 }
+
+func (c OrgDeptModel) Clone() *OrgDeptModel {
+	return new(OrgDeptModel)
+}
+
+func (c OrgDeptModel) CloneList() *[]*OrgDeptModel {
+	return new([]*OrgDeptModel)
+}

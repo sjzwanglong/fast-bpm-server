@@ -10,3 +10,11 @@ type {modelName}Model struct {
 func (p {modelName}Model) TableName() string {
 	return "{tableName}"
 }
+
+func (c {modelName}Model) Clone() *{modelName}Model {
+	return new({modelName}Model)
+}
+
+func (c {modelName}Model) CloneList() *[]*{modelName}Model {
+	return new([]*{modelName}Model)
+}
