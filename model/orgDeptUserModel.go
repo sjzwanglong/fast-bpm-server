@@ -13,10 +13,10 @@ func (du OrgDeptUserModel) TableName() string {
 	return utils.OrgDeptUserInfo
 }
 
-func (c OrgDeptUserModel) Clone() *OrgDeptUserModel {
+func (du OrgDeptUserModel) Clone() interface{} {
 	return new(OrgDeptUserModel)
 }
 
-func (c OrgDeptUserModel) CloneList() *[]*OrgDeptUserModel {
+func (du OrgDeptUserModel) CloneList() interface{} {
 	return new([]*OrgDeptUserModel)
 }

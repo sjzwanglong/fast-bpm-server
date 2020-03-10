@@ -11,10 +11,10 @@ func (p {modelName}Model) TableName() string {
 	return "{tableName}"
 }
 
-func (c {modelName}Model) Clone() *{modelName}Model {
+func (c {modelName}Model) Clone() interface{} {
 	return new({modelName}Model)
 }
 
-func (c {modelName}Model) CloneList() *[]*{modelName}Model {
+func (c {modelName}Model) CloneList() interface{} {
 	return new([]*{modelName}Model)
 }

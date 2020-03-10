@@ -15,10 +15,10 @@ func (p ProcessDefModel) TableName() string {
 	return utils.ProcessDefInfo
 }
 
-func (c ProcessDefModel) Clone() *ProcessDefModel {
+func (p ProcessDefModel) Clone() interface{} {
 	return new(ProcessDefModel)
 }
 
-func (c ProcessDefModel) CloneList() *[]*ProcessDefModel {
+func (p ProcessDefModel) CloneList() interface{} {
 	return new([]*ProcessDefModel)
 }

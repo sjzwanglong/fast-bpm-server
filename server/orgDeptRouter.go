@@ -2,6 +2,7 @@ package server
 
 import (
 	"fast-bpm/controller"
+	"fast-bpm/model"
 )
 
 func init() {
@@ -12,8 +13,9 @@ func registerOrgDeptRouter() {
 	ctl := &controller.OrgDeptController{} //controller对象
 	dualGroup := r.Group("depts")
 	singularGroup := r.Group("dept")
+	instance := &model.OrgDeptModel{}
 	{
-		addDualBaseRouter(dualGroup, ctl)
-		addSingularBaseRouter(singularGroup, ctl)
+		addDualBaseRouter(instance.CloneList, dualGroup, ctl)
+		addSingularBaseRouter(instance.Clone, singularGroup, ctl)
 	}
 }

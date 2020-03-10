@@ -25,10 +25,10 @@ func (u OrgUserModel) TableName() string {
 	return utils.OrgUserInfo
 }
 
-func (c OrgUserModel) Clone() *OrgUserModel {
+func (u OrgUserModel) Clone() interface{} {
 	return new(OrgUserModel)
 }
 
-func (c OrgUserModel) CloneList() *[]*OrgUserModel {
+func (u OrgUserModel) CloneList() interface{} {
 	return new([]*OrgUserModel)
 }
